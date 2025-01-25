@@ -1,4 +1,4 @@
-from functions import add,listar,update
+from functions import *
 
 print("Hi, Welcome to apllication!!!")
 
@@ -13,17 +13,16 @@ while True:
     if instruction == "add":
         # Limpiamos las comillas 
         resto = resto.strip('"')
-        print(f"Comando: {instruction}")
-        print(f"Descripción: {resto}")
+        
         add(resto)
     if instruction == "help":
-        print('add "description"')
+        print('\nadd "description"')
         print('update <id>, "new_description")')
-        print('delete "id"')
+        print('delete <id>')
         print("list")
         print('list "status"')
-        print('mark-in-progress "id"')
-        print('mark-done "id"')
+        print('mark-in-progress <id>')
+        print('mark-done <id>')
     if instruction== "list":
         listar()
     if instruction == "update":
@@ -33,4 +32,11 @@ while True:
         description = description.strip('"')
 
         update(id,description)
+    if instruction == "delete":
+        delete(resto)
+    if instruction == "mark-in-progress":
+        mark_in_progress(resto)
+    if instruction == "mark-done":
+        mark_done(resto)
+
     

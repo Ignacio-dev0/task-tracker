@@ -80,3 +80,76 @@ def update(id,description):
 
             return print("Task updated successfully")  
     print(f"Task with ID {id} not found")
+
+def delete(id):
+    source = 'task.json'
+
+    # Leer el contenido existente del archivo JSON
+    try:
+        with open(source, 'r') as archivo:
+            tasks = json.load(archivo)
+    except FileNotFoundError:
+        tasks = []
+
+    # Buscar la tarea con el ID especificado
+    for task in tasks:
+        if task['id'] == id:
+            # Eliminar la tarea de la lista
+            tasks.remove(task)
+            
+            # Escribir la lista actualizada de vuelta al archivo JSON
+            with open(source, 'w') as archivo:
+                json.dump(tasks, archivo, indent=4)
+
+            return print("Task deleted successfully")  
+    print(f"Task with ID {id} not found")
+
+def mark_in_progress(id):
+    source = 'task.json'
+
+    # Leer el contenido existente del archivo JSON
+    try:
+        with open(source, 'r') as archivo:
+            tasks = json.load(archivo)
+    except FileNotFoundError:
+        tasks = []
+
+    # Buscar la tarea con el ID especificado
+    for task in tasks:
+        if task['id'] == id:
+            # Actualizar el estado de la tarea
+            task['status'] = 'in-progress'
+            # Actualizar la fecha y hora de la tarea
+            task['updateAt'] = datetime.now().isoformat()
+            
+            # Escribir la lista actualizada de vuelta al archivo JSON
+            with open(source, 'w') as archivo:
+                json.dump(tasks, archivo, indent=4)
+
+            return print("Task marked as 'in-progress' successfully")  
+    print(f"Task with ID {id} not found")
+
+def mark_done(id):
+    source = 'task.json'
+
+    # Leer el contenido existente del archivo JSON
+    try:
+        with open(source, 'r') as archivo:
+            tasks = json.load(archivo)
+    except FileNotFoundError:
+        tasks = []
+
+    # Buscar la tarea con el ID especificado
+    for task in tasks:
+        if task['id'] == id:
+            # Actualizar el estado de la tarea
+            task['status'] = 'done'
+            # Actualizar la fecha y hora de la tarea
+            task['updateAt'] = datetime.now().isoformat()
+            
+            # Escribir la lista actualizada de vuelta al archivo JSON
+            with open(source, 'w') as archivo:
+                json.dump(tasks, archivo, indent=4)
+
+            return print("Task marked as 'done' successfully")  
+    print(f"Task with ID {id} not found")
