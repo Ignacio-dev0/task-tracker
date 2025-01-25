@@ -11,10 +11,15 @@ while True:
         instruction, resto = instruction.split(' ',1)
 
     if instruction == "add":
-        # Limpiamos las comillas 
-        resto = resto.strip('"')
-        
-        add(resto)
+        try:
+            # Limpiamos las comillas 
+            resto = resto.strip('"')
+            if resto == "":
+                print("You must enter a description")
+            else:
+                add(resto)
+        except NameError:
+            print("You must enter a description")
     if instruction == "help":
         print('\nadd "description"')
         print('update <id>, "new_description")')
@@ -24,19 +29,38 @@ while True:
         print('mark-in-progress <id>')
         print('mark-done <id>')
     if instruction== "list":
-        listar()
+        if parts == 0:
+            listar()
+        else:
+            resto = resto.strip('"')
+            listarStatus(resto)
     if instruction == "update":
-     
-        id,description = resto.split(' ',1)
-        # Limpiamos las comillas 
-        description = description.strip('"')
+        try:
+            if resto == "":
+                print("You must enter a ID and description")
+            else:
+                id,description = resto.split(' ',1)
+                # Limpiamos las comillas 
+                description = description.strip('"')
 
-        update(id,description)
+                update(id,description)
+        except NameError:
+            print("You must enter a valid ID and description")
     if instruction == "delete":
-        delete(resto)
+        try:
+            if resto == "":
+                print("You must enter a ID")
+            else:
+                delete(resto)
+        except NameError:
+            print("You must enter a valid ID")
     if instruction == "mark-in-progress":
-        mark_in_progress(resto)
+        try:
+            mark_in_progress(resto)
+        except NameError:
+            print("You must enter a valid ID")
     if instruction == "mark-done":
-        mark_done(resto)
-
-    
+        try:
+            mark_done(resto)
+        except NameError:
+            print("You must enter a valid ID")

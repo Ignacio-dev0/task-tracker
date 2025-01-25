@@ -153,3 +153,17 @@ def mark_done(id):
 
             return print("Task marked as 'done' successfully")  
     print(f"Task with ID {id} not found")
+
+def listarStatus(statuss):
+    source = 'task.json'
+    # Leer el contenido existente del archivo JSON
+    try:
+        with open(source, 'r') as archivo:
+            tasks = json.load(archivo)
+    except FileNotFoundError:
+        tasks = []
+    print(f"{'Id':<2} - {'Description':<15} - {'Status'} - {'Created At':<26} - {'Updated At'}")
+    for task in tasks:
+        if task['status'] == statuss:
+            # Mostrar la lista de tareas
+            print(f"{task['id']:<2} - {task['description']:<15} - {task['status']:<6} - {task['createdAt']} - {task['updateAt']}")
